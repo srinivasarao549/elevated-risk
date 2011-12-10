@@ -9,8 +9,8 @@ define(["lib/compose"], function(compose){
 
         // state
         this.image = undefined
-        this.x = 0
-        this.y = 0
+        this.x = 300
+        this.y = 250
         this.width = 40
         this.height = 80
         this.x_vel = 0
@@ -58,8 +58,12 @@ define(["lib/compose"], function(compose){
 
 
             // IMAGES
-            if ( this.x_vel < 0 ) this.image = this.images.left 
-            else if ( this.x_vel >= 0 ) this.image = this.images.right
+            // default
+            if ( !this.image ) this.image = this.images.right
+            
+            // direction
+            if ( input.left ) this.image = this.images.left 
+            else if ( input.right ) this.image = this.images.right
 
         }
             
