@@ -4,16 +4,24 @@
     <title>Elevated Risk</title>
 
 <style>
-    body {
+    body, html {
         background-color: black;
+        height: 100%;
+        padding: 0;
+        margin: 0;
     }
     
     #main_container {
+        overflow: hidden;
         width: 800px;
         margin: 0 auto;
+        background-image: url("img/background_inner.png");
+        background-repeat: repeat-y;
+        height: 150%;
     }
 
     canvas {
+        position: fixed;
         margin-top: 30%;
         background-color: #222;
     }
@@ -35,6 +43,16 @@
 </div>
 
 <script data-main="main.js" src="require.js"></script>
+<script src="lib/jquery-1.7.1.min.js"></script>
+
+<script>
+!function(){
+    $('#main_container').animate({scrollTop: "+100px"}, 100)
+
+}
+</script>
+
+
 <div id="images">
     <!-- player -->
     <img id="player_left" src="img/player_left.png">
@@ -47,6 +65,12 @@
     <img id="player_blocking_left" src="img/player_blocking_left.png">
     <img id="player_blocking_right" src="img/player_blocking_right.png">
 
+
+    <!-- damsel ? -->
+
+    <!-- sword_ninja -->
+
+    <!-- sherukin_ninja -->
 </div>
 </body>
 </html>

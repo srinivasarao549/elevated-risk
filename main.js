@@ -22,6 +22,8 @@ define(["lib/bean", 'lib/flywheel', 'Player', 'Game'], function(bean, flywheel, 
     bean.add(document, 'keydown', function(e){
         var k = e.which
         
+        //e.preventDefault();
+
         if (  k == 37) 
             input.left = true
         else if ( k == 39) 
