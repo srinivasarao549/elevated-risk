@@ -3,7 +3,7 @@ define(["lib/compose", "lib/om"], function(compose, om){
     var game = compose(om, {
         canvas: undefined,
         context: undefined,
-        gravity: 1000,
+        gravity: 1500,
         
         add: function(object){
             om.prototype.add.apply(this, arguments)
@@ -53,10 +53,11 @@ define(["lib/compose", "lib/om"], function(compose, om){
             this.objects.forEach(move)
         
         },
-        update_entities: function(){
-            
+        update_entities: function(td){
+            var td = td / 1000 // convert to seconds
+
             function update(object){
-                if ( object.update ) object.update()
+                if ( object.update ) object.update(td)
             }
             
             this.objects.forEach(update)

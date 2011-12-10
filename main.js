@@ -6,7 +6,7 @@ define(["lib/bean", 'lib/flywheel', 'Player', 'Game'], function(bean, flywheel, 
             jump: false,
             left: false,
             right: false,
-            fire: false,
+            attack: false,
             block: false
         },
         game = new Game()
@@ -29,7 +29,7 @@ define(["lib/bean", 'lib/flywheel', 'Player', 'Game'], function(bean, flywheel, 
         else if ( k == 38)
             input.jump = true
         else if ( k == 88)
-            input.fire = true
+            input.attack = true
         else if ( k == 67)
             input.block = true
     })
@@ -44,7 +44,7 @@ define(["lib/bean", 'lib/flywheel', 'Player', 'Game'], function(bean, flywheel, 
         else if ( k == 38)
             input.jump = false
         else if ( k == 88)
-            input.fire = false
+            input.attack = false
         else if ( k == 67)
             input.block = false
 
@@ -57,7 +57,7 @@ define(["lib/bean", 'lib/flywheel', 'Player', 'Game'], function(bean, flywheel, 
     flywheel(function(td){
         game.draw_entities()
         game.move_entities(td)
-        game.update_entities()
+        game.update_entities(td)
     }).start()
 
 })
