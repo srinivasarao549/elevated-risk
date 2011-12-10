@@ -8,11 +8,11 @@ define(["lib/compose"], function(compose){
         this.friction = 100
 
         // state
-        this.image = document.getElementById("player_left")
+        this.image = undefined
         this.x = 0
         this.y = 0
-        this.width = 100
-        this.height = 125
+        this.width = 40
+        this.height = 80
         this.x_vel = 0
         this.y_vel = 0
         
@@ -23,10 +23,14 @@ define(["lib/compose"], function(compose){
         this.attacking = false
 
         // convenience
+        this.images = {
+            left: document.getElementById("player_left"),
+            right: document.getElementById("player_right")
+        }
         this.game = undefined
     },
     {
-               update: function(td){
+        update: function(td){
             var input = this.game.input
 
             // gravity and on floor logic
@@ -51,6 +55,12 @@ define(["lib/compose"], function(compose){
             // attacking and blocking
             if ( input.block ) this.blocking = true
             if ( input.attack ) this.attacking = true
+
+
+            // IMAGES
+            if ( this.x_vel < 0 ) this.image = this.images.left 
+            else if ( this.x_vel >= 0 ) this.image = this.images.right
+
         }
             
     })
