@@ -1,4 +1,4 @@
-define(["lib/bean", 'lib/flywheel', 'Player', 'Game'], function(bean, flywheel, Player, Game){
+define(["lib/bean", 'lib/flywheel', 'player', 'game'], function(bean, flywheel, Player, Game){
     
     // init game
     var canvas = document.getElementById("main"),
