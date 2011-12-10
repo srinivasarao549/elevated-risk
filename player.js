@@ -5,17 +5,19 @@ define(["lib/compose"], function(compose){
         // constraints
         this.max_y_vel = 1000
         this.max_x_vel = 300
-        this.friction = 100
+        this.friction = 70
 
         // state
         this.image = undefined
         this.x = 300
         this.y = 250
-        this.width = 40
-        this.height = 80
+        this.width = 80
+        this.height = 100
         this.x_vel = 0
         this.y_vel = 0
         
+        this.facing = "left"
+
         this.health = 100
         this.on_floor = false
         this.apply_friction = true
@@ -25,7 +27,11 @@ define(["lib/compose"], function(compose){
         // convenience
         this.images = {
             left: document.getElementById("player_left"),
-            right: document.getElementById("player_right")
+            right: document.getElementById("player_right"),
+            attacking_right: document.getElementById("player_attacking_right"),
+            attacking_left: document.getElementById("player_attacking_left"),
+            blocking_right: document.getElementById("player_blocking_right"),
+            blocking_left: document.getElementById("player_blocking_left")
         }
         this.game = undefined
     },
@@ -33,7 +39,7 @@ define(["lib/compose"], function(compose){
         update: function(td){
             var input = this.game.input
 
-            // gravity and on floor logic
+            //  on floor logic
             if ( this.y + this.height >= 300 ){
                 this.y = 300 - this.height
                 this.y_vel = 0
@@ -48,23 +54,31 @@ define(["lib/compose"], function(compose){
 
             // moving left to right and friction logic
             this.apply_friction = false
-            if ( input.left ) this.x_vel -= (1000 * td)
-            else if ( input.right ) this.x_vel += (1000 * td)
+            if ( input.left ){
+                 this.x_vel -= (1000 * td)
+                this.facing = "left"
+            }            
+            else if ( input.right ) {
+                this.x_vel += (1000 * td)
+                this.facing = "right"
+            } 
             else this.apply_friction = true
 
             // attacking and blocking
             if ( input.block ) this.blocking = true
-            if ( input.attack ) this.attacking = true
+            else this.blocking = false
 
+            if ( input.attack ) this.attacking = true
+            else this.attacking = false
 
             // IMAGES
-            // default
-            if ( !this.image ) this.image = this.images.right
+            if ( !this.attacking && !this.blocking ) this.image = this.images[this.facing]
+            if ( this.attacking ) this.image = this.images["attacking_" + this.facing]
+            if ( this.blocking ) this.image = this.images["blocking_" + this.facing]
             
-            // direction
-            if ( input.left ) this.image = this.images.left 
-            else if ( input.right ) this.image = this.images.right
-
+            this.y += this.height - this.image.height
+            this.height = this.image.height
+        
         }
             
     })
