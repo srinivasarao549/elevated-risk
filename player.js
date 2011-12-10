@@ -8,10 +8,11 @@ define(["lib/compose"], function(compose){
         this.friction = 100
 
         // state
+        this.image = document.getElementById("player_left")
         this.x = 0
         this.y = 0
         this.width = 100
-        this.height = 100
+        this.height = 125
         this.x_vel = 0
         this.y_vel = 0
         
@@ -25,10 +26,7 @@ define(["lib/compose"], function(compose){
         this.game = undefined
     },
     {
-        draw: function(context){
-            context.fillRect(this.x, this.y, 100, 100)
-        },
-        update: function(td){
+               update: function(td){
             var input = this.game.input
 
             // gravity and on floor logic

@@ -53,7 +53,6 @@ define(["lib/bean", 'lib/flywheel', 'Player', 'Game'], function(bean, flywheel, 
     // add player to game
     game.add(new Player())
 
-
     flywheel(function(td){
         game.draw_entities()
         game.move_entities(td)

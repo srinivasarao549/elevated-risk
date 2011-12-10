@@ -5,18 +5,20 @@ define(["lib/compose", "lib/om"], function(compose, om){
         context: undefined,
         gravity: 1500,
         
+        // object management
         add: function(object){
             om.prototype.add.apply(this, arguments)
             object.game = this
         },
 
+        // object stages
         draw_entities: function(){
             var canvas = this.canvas,
                 context = this.context
            
             function draw(object){
                 if ( object.draw ) object.draw(context)
-            
+                if ( object.image ) context.drawImage(object.image, object.x, object.y)
             }
  
             // clear canvas
@@ -62,7 +64,17 @@ define(["lib/compose", "lib/om"], function(compose, om){
             
             this.objects.forEach(update)
         },
-        collide_entities: function(){}
+        collide_entities: function(){},
+
+
+        // GAME STAGES
+        
+        // stages info
+        stages: {
+        
+            
+        },
+        next_stage: function(){}
     })
 
 
