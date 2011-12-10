@@ -1,4 +1,4 @@
-define(["lib/compose", "core/objectManager"], function(compose, ObjectManager){
+define(["lib/compose", "lib/om"], function(compose, ObjectManager){
 
     return compose(ObjectManager, function(canvas, entities){
         
