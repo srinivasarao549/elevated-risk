@@ -37,7 +37,8 @@ define(["lib/compose"], function(compose){
     },
     {
         update: function(td){
-            var input = this.game.input
+            var input = this.game.input,
+                was_facing = this.facing
 
             //  on floor logic
             if ( this.y + this.height >= 300 ){
@@ -76,6 +77,21 @@ define(["lib/compose"], function(compose){
             if ( this.attacking ) this.image = this.images["attacking_" + this.facing]
             if ( this.blocking ) this.image = this.images["blocking_" + this.facing]
             
+
+            // correct for animation and turning
+            if ( was_facing != this.facing ){
+                if ( this.facing == "right" ) this.x += 30
+                if ( this.facing == "left") this.x -= 10
+            }
+
+            if ( this.facing == "left"){
+                this.x += this.width - this.image.width
+                this.width = this.image.width
+            } else if ( this.facing == "right" ) {
+                this.x -= this.width - this.image.width
+                this.width = this.image.width
+            }
+
             this.y += this.height - this.image.height
             this.height = this.image.height
         
