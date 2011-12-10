@@ -1,7 +1,6 @@
-define(["lib/bean", 'lib/flywheel'], function(bean, flywheel){
+define(["lib/bean", 'lib/flywheel', 'Player', 'Game'], function(bean, flywheel, Player, Game){
     
     // init game
-
     var canvas = document.getElementById("main"),
         input = {
             jump: false,
@@ -9,7 +8,15 @@ define(["lib/bean", 'lib/flywheel'], function(bean, flywheel){
             right: false,
             fire: false,
             block: false
-        }
+        },
+        game = new Game()
+
+
+
+    // set up game
+    game.canvas = canvas
+    game.context = canvas.getContext('2d')
+    game.input = input
 
     // get controls
     bean.add(document, 'keydown', function(e){
@@ -43,9 +50,14 @@ define(["lib/bean", 'lib/flywheel'], function(bean, flywheel){
 
     })
 
-    flywheel(function(){
+    // add player to game
+    game.add(new Player())
 
-        // main game loop
+
+    flywheel(function(td){
+        game.draw_entities()
+        game.move_entities(td)
+        game.update_entities()
     }).start()
 
 })
