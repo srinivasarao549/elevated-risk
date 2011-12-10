@@ -44,6 +44,7 @@ define(["lib/bean", 'lib/flywheel'], function(bean, flywheel){
     })
 
     flywheel(function(){
+
         // main game loop
     }).start()
 
