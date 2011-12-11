@@ -149,13 +149,21 @@ define(["lib/compose", "throwing_star"], function(compose, ThrowingStar){
                 }
             }
 
+            function celebrate(object){
+                jump(object, td)
+            }
+
             if ( this.facing == "left" ) this.image = this.images.left
             else this.image = this.images.right
             
             // ai stuff
             check_on_floor(this)
             check_in_room(this)
-            check_close(this, player, this.game)
+
+            
+            if ( player ) check_close(this, player, this.game)
+            else celebrate(this)
+
             correct_height(this)
             
             // invunerability
