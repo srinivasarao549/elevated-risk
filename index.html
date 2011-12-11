@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Elevated Risk</title>
-
+<link href='http://fonts.googleapis.com/css?family=Ceviche+One' rel='stylesheet' type='text/css'>
 <style>
     body, html {
         background-color: black;
@@ -10,6 +10,7 @@
         padding: 0;
         margin: 0;
         color: #eee;
+        font-family: 'Ceviche One', cursive;
     }
     
     #main_container {
@@ -37,11 +38,19 @@
         display: none;
     }
 
+
     #health_container {
         position: absolute;
         top: 0.5em;
-        left: 0.5em;
         font-size: 2em;
+        left: 0.5em;
+    }
+
+    #score_container {
+        position: absolute;
+        top: 0.5em;
+        font-size: 2em;
+        right: 0.5em;
     }
 
 </style>
@@ -63,10 +72,9 @@
 <script src="lib/jquery-1.7.1.min.js"></script>
 
 <script>
-
 // move background 
 !function elevator_down(){
-
+    
     $("#main_container").scrollTop(0)
     $("#main_container")
         .animate({'scrollTop': "+506px"}, 
