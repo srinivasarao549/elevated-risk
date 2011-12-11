@@ -81,14 +81,13 @@ define(["lib/compose"], function(compose){
             // correct for animation and turning
             if ( was_facing != this.facing ){
                 if ( this.facing == "right" ) this.x += 30
-                if ( this.facing == "left") this.x -= 10
-            }
+                if ( this.facing == "left") this.x -= 30
+                }
 
             if ( this.facing == "left"){
                 this.x += this.width - this.image.width
                 this.width = this.image.width
             } else if ( this.facing == "right" ) {
-                this.x -= this.width - this.image.width
                 this.width = this.image.width
             }
 
