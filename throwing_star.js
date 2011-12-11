@@ -3,8 +3,11 @@ define(['lib/compose'], function(compose){
     var ThrowingStar = compose({
         x: 0,
         y: 0,
+        height: 10,
+        width: 10,
         x_vel: 100,
         y_vel: 0,
+        collision_type: "weapon",
         falling: false,
         images: {
             left: document.getElementById("throwing_star_left"),
@@ -23,8 +26,15 @@ define(['lib/compose'], function(compose){
             }
 
             check_in_room(this, this.game)
-        }
+        },
         
+        check_collision: function(object){
+            if ( object.id == "player" ) {
+                object.damage(5);
+                this.game.remove(this)
+
+            }
+        }
     })
 
     return ThrowingStar

@@ -62,6 +62,7 @@ define(["lib/bean", 'lib/flywheel', 'player', 'level_manager', 'game'], function
     flywheel(function(td, ts){
         game.draw_entities()
         game.move_entities(td)
+        game.collide_entities()
         game.update_entities(td, ts)
     }).start()
 

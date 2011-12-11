@@ -50,7 +50,6 @@
          id="stop5912" />
     </linearGradient>
     <linearGradient
-       inkscape:collect="always"
        id="linearGradient5898"
        osb:paint="gradient">
       <stop
@@ -520,18 +519,6 @@
          inkscape:collect="always"
          stdDeviation="8.5954943"
          id="feGaussianBlur5766" />
-    </filter>
-    <filter
-       inkscape:collect="always"
-       id="filter6865"
-       x="-0.087974073"
-       width="1.1759481"
-       y="-0.7568953"
-       height="2.5137906">
-      <feGaussianBlur
-         inkscape:collect="always"
-         stdDeviation="6.5543663"
-         id="feGaussianBlur6867" />
     </filter>
     <filter
        inkscape:collect="always"
@@ -1127,15 +1114,15 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.3331792"
-     inkscape:cx="627.35624"
-     inkscape:cy="75.309541"
+     inkscape:cx="391.84424"
+     inkscape:cy="-314.73555"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1680"
      inkscape:window-height="1002"
-     inkscape:window-x="1298"
-     inkscape:window-y="17"
+     inkscape:window-x="1280"
+     inkscape:window-y="0"
      inkscape:window-maximized="1" />
   <metadata
      id="metadata7">
@@ -2819,7 +2806,7 @@
            sodipodi:cy="76.473465"
            sodipodi:rx="1.2694488"
            sodipodi:ry="1.2694488"
-           d="m 75.849565,76.473465 a 1.2694488,1.2694488 0 1 1 -2.538897,0 1.2694488,1.2694488 0 1 1 2.538897,0 z"
+           d="m 75.849565,76.473465 c 0,0.701097 -0.568352,1.269449 -1.269449,1.269449 -0.701097,0 -1.269448,-0.568352 -1.269448,-1.269449 0,-0.701097 0.568351,-1.269449 1.269448,-1.269449 0.701097,0 1.269449,0.568352 1.269449,1.269449 z"
            transform="translate(301.15753,491.74618)" />
         <rect
            style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1.48590016;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
@@ -2831,7 +2818,7 @@
            transform="matrix(0.96344568,0.26790376,-0.27706889,0.96085006,0,0)" />
         <path
            transform="matrix(-1,0,0,1,468.24874,491.42882)"
-           d="m 75.849565,76.473465 a 1.2694488,1.2694488 0 1 1 -2.538897,0 1.2694488,1.2694488 0 1 1 2.538897,0 z"
+           d="m 75.849565,76.473465 c 0,0.701097 -0.568352,1.269449 -1.269449,1.269449 -0.701097,0 -1.269448,-0.568352 -1.269448,-1.269449 0,-0.701097 0.568351,-1.269449 1.269448,-1.269449 0.701097,0 1.269449,0.568352 1.269449,1.269449 z"
            sodipodi:ry="1.2694488"
            sodipodi:rx="1.2694488"
            sodipodi:cy="76.473465"
@@ -2984,7 +2971,7 @@
        height="505.62076"
        width="800"
        id="rect3419"
-       style="fill:#000000;fill-opacity:0.6;stroke:none"
+       style="fill:#000000;fill-opacity:0.87111109;stroke:none"
        inkscape:export-filename="/Library/WebServer/Documents/game/compo/img/background_inner.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />

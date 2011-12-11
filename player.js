@@ -109,8 +109,12 @@ define(["lib/compose"], function(compose){
             this.y += this.height - this.image.height
             this.height = this.image.height
         
+        },
+
+        damage: function(amount){
+            this.health -= amount
+            if ( this.health <= 0 ) this.game.remove(this)
         }
-            
     })
 
     return Player

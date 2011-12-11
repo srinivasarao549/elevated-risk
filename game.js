@@ -4,19 +4,14 @@ define(["lib/compose", "lib/om"], function(compose, om){
         canvas: undefined,
         context: undefined,
         gravity: 1500,
-        collision_objects: {},
+        collision_objects: [],
 
         // object management
         add: function(object){
             om.prototype.add.apply(this, arguments)
             object.game = this
             
-            if ( object.collision_type ) {
-                if ( !this.collision_objects[object.collision_type] ) 
-                    this.collision_objects[object.collision_type] = []
-                this.collision_objects[object.collision_type].push(object)
-            }
-
+            if ( object.collision_type ) this.collision_objects.push(object)
         },
 
         // object stages
@@ -73,8 +68,35 @@ define(["lib/compose", "lib/om"], function(compose, om){
             this.objects.forEach(update)
         },
         collide_entities: function(){
-        
-        
+            var objects = this.objects.filter(function(obj){ 
+                            return obj.check_collision || obj.collision_type
+                        })
+
+            function check_all(outer){
+                objects.forEach(function(inner){
+                    check_one(outer, inner)
+                })
+            }
+
+            function check_one(objecta, objectb){
+                if ( objecta === objectb ) return
+                if ( aabb_aabb(objecta, objectb) ) objecta.check_collision(objectb)
+            }
+
+            function check_p(object){
+                if ( object.check_collision ) check_all(object)
+            }
+
+            function aabb_aabb(A, B){
+                var Aright = A.x + A.width,
+                    Abottom = A.y + A.height,
+                    Bright = B.x + B.width,
+                    Bbottom = B.y + B.width
+                
+               return !(A.x > Bright || Aright < B.x || A.y > Bbottom || Abottom < B.y)
+            }
+
+            objects.forEach(check_p)
         },
     })
 

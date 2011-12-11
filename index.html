@@ -15,7 +15,8 @@
         overflow: hidden;
         width: 800px;
         margin: 0 auto;
-               height: 100%;
+        max-height: 600px;
+        height: 100%;
     }
 
     #inner_container {
@@ -27,7 +28,7 @@
     canvas {
         background-image: url("img/background_room.png");
         position: fixed;
-        margin-top: 30%;
+        margin-top: 100px;
         background-color: #222;
     }
 
@@ -59,7 +60,7 @@
     $("#main_container").scrollTop(0)
     $("#main_container")
         .animate({'scrollTop': "+506px"}, 
-                 10000,
+                 5000,
                  "linear", 
                  elevator_down
                  )
