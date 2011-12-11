@@ -6,6 +6,7 @@ define(["lib/compose"], function(compose){
         this.max_y_vel = 1000
         this.max_x_vel = 300
         this.friction = 70
+        this.collision_type = "enemy"
 
         // state
         this.image = undefined
@@ -26,12 +27,8 @@ define(["lib/compose"], function(compose){
 
         // convenience
         this.images = {
-            left: document.getElementById("player_left"),
-            right: document.getElementById("throw_ninja_right"),
-            attacking_right: document.getElementById("throw_ninja_right"),
-            attacking_left: document.getElementById("throw_ninja_attacking_left"),
-            blocking_right: document.getElementById("throw_ninja_blocking_right"),
-            blocking_left: document.getElementById("throw_ninja_blocking_left")
+            left: document.getElementById("throw_ninja_left"),
+            right: document.getElementById("throw_ninja_right")
         }
         this.game = undefined
     },
@@ -70,15 +67,18 @@ define(["lib/compose"], function(compose){
                 else object.apply_friction = true
             }
  
-            function correct_height(){
+            function correct_height(object){
                 object.y += object.height - object.image.height
                 object.height = object.image.height
             }
             
+            
+            this.image = this.images.left;
+            
             check_on_floor(this)
             jump(this, td)
-
-            this.image = this.images.left;
+            correct_height(this)
+            
         
         }
             

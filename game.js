@@ -4,11 +4,19 @@ define(["lib/compose", "lib/om"], function(compose, om){
         canvas: undefined,
         context: undefined,
         gravity: 1500,
-        
+        collision_objects: {},
+
         // object management
         add: function(object){
             om.prototype.add.apply(this, arguments)
             object.game = this
+            
+            if ( object.collision_type ) {
+                if ( !this.collision_objects[object.collision_type] ) 
+                    this.collision_objects[object.collision_type] = []
+                this.collision_objects[object.collision_type].push(object)
+            }
+
         },
 
         // object stages
@@ -64,7 +72,10 @@ define(["lib/compose", "lib/om"], function(compose, om){
             
             this.objects.forEach(update)
         },
-        collide_entities: function(){},
+        collide_entities: function(){
+        
+        
+        },
     })
 
 

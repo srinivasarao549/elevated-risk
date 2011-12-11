@@ -6,6 +6,7 @@ define(["lib/compose"], function(compose){
         this.max_y_vel = 1000
         this.max_x_vel = 300
         this.friction = 70
+        this.collision_type = "goodie"
 
         // state
         this.image = undefined
