@@ -34,7 +34,8 @@ define(["lib/compose"], function(compose){
     },
     {
         update: function(td){
-            var was_facing = this.facing
+            var was_facing = this.facing,
+                player = this.game.find_by_id("player")
 
             function check_on_floor(object){
                  //  on floor logic
@@ -53,7 +54,7 @@ define(["lib/compose"], function(compose){
 
             }
 
-            function move_left_right(object, input, td){
+            function move(object, input, td){
                 // moving left to right and friction logic
                 object.apply_friction = false
                 if ( input.left ){
@@ -76,7 +77,10 @@ define(["lib/compose"], function(compose){
             this.image = this.images.left;
             
             check_on_floor(this)
-            jump(this, td)
+           // jump(this, td)
+
+            if ( player.x < this.x ) move(this, {left: true, right: false}, td )
+            else move(this, {left: false, right: true}, td)
             correct_height(this)
             
         

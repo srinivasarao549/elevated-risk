@@ -37,6 +37,7 @@ define(["lib/compose"], function(compose){
         this.game = undefined
     },
     {
+        id: "player",
         update: function(td){
             var input = this.game.input,
                 was_facing = this.facing
