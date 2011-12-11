@@ -4,7 +4,8 @@ define(["lib/compose", "throwing_star"], function(compose, ThrowingStar){
         
         // last time an action was taken, for 'cooldowns'
         this.last = {
-            attack: 0
+            attack: 0,
+            invunerable: 0
         }
         
         // constraints
@@ -25,7 +26,10 @@ define(["lib/compose", "throwing_star"], function(compose, ThrowingStar){
         this.facing = "left"
 
         this.health = 100
-        this.on_floor = false
+        this.invunerable = false
+        this.make_invunerable = false
+
+        this.falling = false
         this.apply_friction = true
         this.blocking = false
         this.attacking = false
@@ -137,10 +141,9 @@ define(["lib/compose", "throwing_star"], function(compose, ThrowingStar){
                     object.make_invunerable = false
                     object.invunerable = true
                     object.last.invunerable = ts
-                } else if ( object.invunerable > object.last.invunerable + 1000 ) {
+                } else if ( ts > object.last.invunerable + 1000 ) {
                     object.invunerable = false
                 }
-                console.log(object.invunerable, object.make_invunerable)
             }
 
             if ( this.facing == "left" ) this.image = this.images.left
