@@ -86,7 +86,7 @@ define(["lib/compose"], function(compose){
                 if ( ts > object.last.attack + 500 && input.attack ) {
                     object.attacking = true
                     object.last.attack = ts
-                    
+                    object.game.sounds.air_cut.play()
                 } else if ( ts > object.last.attack + 100 ){
                     object.attacking = false
                 }
@@ -125,6 +125,9 @@ define(["lib/compose"], function(compose){
         damage: function(amount){
             this.health -= amount
             this.health_el.innerHTML = this.health
+            if ( !this.attacking ) this.game.sounds.grunt.play()
+            else this.game.sounds.sword.play()
+
             if ( this.health <= 0 ) {
             
                 this.game.remove(this)
