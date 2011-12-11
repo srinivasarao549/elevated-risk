@@ -65,16 +65,6 @@ define(["lib/compose", "lib/om"], function(compose, om){
             this.objects.forEach(update)
         },
         collide_entities: function(){},
-
-
-        // GAME STAGES
-        
-        // stages info
-        stages: {
-        
-            
-        },
-        next_stage: function(){}
     })
 
 

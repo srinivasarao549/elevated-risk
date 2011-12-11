@@ -1,4 +1,4 @@
-define(["lib/bean", 'lib/flywheel', 'player', 'game'], function(bean, flywheel, Player, Game){
+define(["lib/bean", 'lib/flywheel', 'player', 'level_manager', 'game'], function(bean, flywheel, Player, LevelManager, Game){
     
     // init game
     var canvas = document.getElementById("main"),
@@ -57,6 +57,7 @@ define(["lib/bean", 'lib/flywheel', 'player', 'game'], function(bean, flywheel, 
 
     // add player to game
     game.add(new Player())
+    game.add(new LevelManager())
 
     flywheel(function(td){
         game.draw_entities()
