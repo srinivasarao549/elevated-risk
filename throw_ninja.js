@@ -69,7 +69,6 @@ define(["lib/compose", "throwing_star"], function(compose, ThrowingStar){
                     object.x = 0
                     object.x_vel = 0
                 }
-            
             }
 
             function move(object, input, td){

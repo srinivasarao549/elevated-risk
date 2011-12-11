@@ -15,9 +15,13 @@
         overflow: hidden;
         width: 800px;
         margin: 0 auto;
+               height: 100%;
+    }
+
+    #inner_container {
+        height: 300%;
         background-image: url("img/background_inner.png");
         background-repeat: repeat-y;
-        height: 150%;
     }
 
     canvas {
@@ -38,21 +42,28 @@
 <body>
 
 <div id="main_container">
-    <canvas id="main" width="800px" height="300px">
-        Play this on Chrome, buddy - you'll thank yourself.
-    </canvas>
+    <div id="inner_container">
+        <canvas id="main" width="800px" height="300px">
+            Play this on Chrome, buddy - you'll thank yourself.
+        </canvas>
+    </div>
 </div>
-
 <script data-main="main.js" src="require.js"></script>
 <script src="lib/jquery-1.7.1.min.js"></script>
 
 <script>
 
 // move background 
-!function(){
-    $('#main_container').animate({scrollTop: "+100px"}, 100)
+!function elevator_down(){
 
-}
+    $("#main_container").scrollTop(0)
+    $("#main_container")
+        .animate({'scrollTop': "+506px"}, 
+                 10000,
+                 "linear", 
+                 elevator_down
+                 )
+}()
 </script>
 
 
