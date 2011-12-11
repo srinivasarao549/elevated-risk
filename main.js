@@ -34,6 +34,9 @@ define(["lib/bean", 'lib/flywheel', 'player', 'game'], function(bean, flywheel, 
             input.attack = true
         else if ( k == 67)
             input.block = true
+    
+        // disable up, down and space for scrolling
+        if ( k == 38 || k == 40 || k == 32 ) e.preventDefault()
     })
 
     bean.add(document, 'keyup', function(e){
