@@ -139,6 +139,7 @@ define(["lib/compose"], function(compose){
                 this.score += 100
                 this.score_el.innerHTML = this.score
                 object.damage(20, this)
+                this.game.sounds.sword.play()
             }
         }
     })

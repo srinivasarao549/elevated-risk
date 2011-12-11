@@ -1,14 +1,34 @@
 define(["lib/bean", 'lib/flywheel', 'player', 'level_manager', 'game'], function(bean, flywheel, Player, LevelManager, Game){
-    
 
-    // show title, then init
+    var sounds = {},
+        sound_list = {
+            sword: 'sound/sword.wav'
+        }
+
+    $("body").fadeIn(500)
+    init_sm()
     
-    $("body").fadeIn(500, function(){ 
-        $("#grey_layer").fadeOut(1500, 
-            init
-        );
-        $("#main_notification").fadeOut(1500)
-    })
+    // init sound manager
+    function init_sm(){
+        soundManager.url = 'soundmanager2.swf';
+        soundManager.flashVersion = 9; // optional: shiny features (default = 8)
+        soundManager.onready(function(){
+            // load sounds
+            Object.keys(sound_list).forEach(function(sound_name){
+                sounds[sound_name] = soundManager.createSound(sound_name, sound_list[sound_name])
+            })
+
+            //
+            init_title_screen()
+        });
+    }
+    
+    function init_title_screen(){
+            $("#grey_layer").fadeOut(1500, 
+                init
+            );
+            $("#main_notification").fadeOut(1500)
+    }
     
     function init(){
          // init game
@@ -28,6 +48,7 @@ define(["lib/bean", 'lib/flywheel', 'player', 'level_manager', 'game'], function
         game.canvas = canvas
         game.context = canvas.getContext('2d')
         game.input = input
+        game.sounds = sounds
 
         // get controls
         bean.add(document, 'keydown', function(e){
