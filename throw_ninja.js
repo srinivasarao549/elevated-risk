@@ -98,6 +98,7 @@ define(["lib/compose", "throwing_star"], function(compose, ThrowingStar){
                 jump(object, td)
             }
 
+
             // try to attack
             function if_far(object, player, game){
                 attack(object, player, game)
