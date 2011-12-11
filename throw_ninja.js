@@ -96,6 +96,8 @@ define(["lib/compose", "throwing_star"], function(compose, ThrowingStar){
             
             // try to jump over and run
             function if_close(object, player, game){
+                attack(object, player, game)
+                
                 if ( object.x < 400 ) move(object, {left: false, right: true}, td)
                 else move(object, {left: true, right: false}, td)
                 jump(object, td)
@@ -105,9 +107,9 @@ define(["lib/compose", "throwing_star"], function(compose, ThrowingStar){
             // try to attack
             function if_far(object, player, game){
                 attack(object, player, game)
-            // run away
-            if ( player.x < this.x ) move(this, {left: false, right: true}, td )
-            else move(this, {left: true, right: false}, td)
+                // run away
+                if ( player.x < this.x ) move(this, {left: false, right: true}, td )
+                else move(this, {left: true, right: false}, td )
 
             }
 
