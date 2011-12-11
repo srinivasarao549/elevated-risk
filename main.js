@@ -59,10 +59,10 @@ define(["lib/bean", 'lib/flywheel', 'player', 'level_manager', 'game'], function
     game.add(new Player())
     game.add(new LevelManager())
 
-    flywheel(function(td){
+    flywheel(function(td, ts){
         game.draw_entities()
         game.move_entities(td)
-        game.update_entities(td)
+        game.update_entities(td, ts)
     }).start()
 
 })

@@ -14,7 +14,9 @@ define(['lib/compose', 'throw_ninja'], function(compose, ThrowNinja){
             }
 
             if ( this.enemies_on_stage.length == 0 ) {
-                add_enemy(this.game, new ThrowNinja, this.enemies_on_stage)
+                var ninja = new ThrowNinja
+                ninja.x = 20
+                add_enemy(this.game, ninja, this.enemies_on_stage)
             }
         }   
     

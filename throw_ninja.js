@@ -3,7 +3,9 @@ define(["lib/compose", "throwing_star"], function(compose, ThrowingStar){
     var ThrowNinja = compose(function(){
         
         // last time an action was taken, for 'cooldowns'
-        this.last = {}
+        this.last = {
+            attack: 0
+        }
         
         // constraints
         this.max_y_vel = 1000
@@ -36,7 +38,7 @@ define(["lib/compose", "throwing_star"], function(compose, ThrowingStar){
         this.game = undefined
     },
     {
-        update: function(td){
+        update: function(td, ts){
             var was_facing = this.facing,
                 player = this.game.find_by_id("player")
 
@@ -57,6 +59,8 @@ define(["lib/compose", "throwing_star"], function(compose, ThrowingStar){
                 else object.y_vel -= (600 * td)
 
             }
+
+
             function check_in_room(object){
                 if ( object.x + object.width >= 800 ) {
                     object.x = 800 - object.width
@@ -66,12 +70,6 @@ define(["lib/compose", "throwing_star"], function(compose, ThrowingStar){
                     object.x_vel = 0
                 }
             
-            }
-              
-            function jump(object, td){
-                if ( object.on_floor ) object.y_vel -= 500
-                else object.y_vel -= (600 * td)
-
             }
 
             function move(object, input, td){
@@ -94,46 +92,55 @@ define(["lib/compose", "throwing_star"], function(compose, ThrowingStar){
             }
             
             // try to jump over and run
-            function if_close(){
-            
+            function if_close(object, player, game){
+                if ( object.x < 400 ) move(object, {left: false, right: true}, td)
+                else move(object, {left: true, right: false}, td)
+                jump(object, td)
             }
 
             // try to attack
-            function if_far(){
-            
+            function if_far(object, player, game){
+                attack(object, player, game)
+            // run away
+            if ( player.x < this.x ) move(this, {left: false, right: true}, td )
+            else move(this, {left: true, right: false}, td)
+
             }
 
             function attack(object, player, game){
-                var star = new ThrowingStar
 
-                if( object.x < player.x ){
-                    star.x_vel = 1000
-                } else {
-                    star.x_vel = -1000
-                }
-                star.x = object.x + object.width/2
-                star.y = object.y + object.height/2
+                if ( ts > object.last.attack + 1000 ){
+                    var star = new ThrowingStar
 
-                game.add(star)
+                    if( object.x < player.x ){
+                        star.x_vel = 500
+                    } else {
+                        star.x_vel = -500
+                    }
+                    star.x = object.x + object.width/2
+                    star.y = object.y + object.height/2
+
+                    object.last.attack = ts
+                    game.add(star)    
+                } 
             }
 
-            function check_close(object, player){
-            
+            function check_close(object, player, game){
+                if ( Math.abs(object.x - player.x) < 200 ) 
+                    if_close(object, player, game)
+                else 
+                    if_far(object, player, game)
             }
 
-    
             if ( this.facing == "left" ) this.image = this.images.left
             else this.image = this.images.right
-
             
             check_on_floor(this)
             check_in_room(this)
 
-            // run away
-            if ( player.x < this.x ) move(this, {left: false, right: true}, td )
-            else move(this, {left: true, right: false}, td)
-            
-            attack(this, player, this.game)
+                     
+            check_close(this, player, this.game)
+
             correct_height(this)
                 
         }

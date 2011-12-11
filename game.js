@@ -63,11 +63,11 @@ define(["lib/compose", "lib/om"], function(compose, om){
             this.objects.forEach(move)
         
         },
-        update_entities: function(td){
+        update_entities: function(td, ts){
             var td = td / 1000 // convert to seconds
 
             function update(object){
-                if ( object.update ) object.update(td)
+                if ( object.update ) object.update(td, ts)
             }
             
             this.objects.forEach(update)
