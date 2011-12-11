@@ -1,7 +1,9 @@
 define(["lib/compose"], function(compose){
 
     var Player = compose(function(){
-        
+        this.last = {
+            attack: 0
+        }
         // constraints
         this.max_y_vel = 1000
         this.max_x_vel = 300
@@ -30,15 +32,13 @@ define(["lib/compose"], function(compose){
             left: document.getElementById("player_left"),
             right: document.getElementById("player_right"),
             attacking_right: document.getElementById("player_attacking_right"),
-            attacking_left: document.getElementById("player_attacking_left"),
-            blocking_right: document.getElementById("player_blocking_right"),
-            blocking_left: document.getElementById("player_blocking_left")
+            attacking_left: document.getElementById("player_attacking_left")
         }
         this.game = undefined
     },
     {
         id: "player",
-        update: function(td){
+        update: function(td, ts){
             var input = this.game.input,
                 was_facing = this.facing
 
@@ -75,23 +75,26 @@ define(["lib/compose"], function(compose){
             }
            
 
+            function handle_attack(object, input, ts){
+                if ( ts > object.last.attack + 500 && input.attack ) {
+                    object.attacking = true
+                    object.last.attack = ts
+                    
+                } else if ( ts > object.last.attack + 100 ){
+                    object.attacking = false
+                }
+            }
+
             check_on_floor(this)
             if ( input.jump ) jump(this, td)
             move_left_right(this, input, td)
 
-
-            // attacking and blocking
-            if ( input.block ) this.blocking = true
-            else this.blocking = false
-
-            if ( input.attack ) this.attacking = true
-            else this.attacking = false
+            // attacking
+            handle_attack(this, this.game.input, ts)
 
             // IMAGES
             if ( !this.attacking && !this.blocking ) this.image = this.images[this.facing]
             if ( this.attacking ) this.image = this.images["attacking_" + this.facing]
-            if ( this.blocking ) this.image = this.images["blocking_" + this.facing]
-            
 
             // correct for animation and turning
             if ( was_facing != this.facing ){
