@@ -53,14 +53,44 @@
         right: 0.5em;
     }
 
+    #main_notification {
+        position: absolute;
+        text-align: center;
+        top: 0.5em;
+        text-shadow: 2px 5px 2px #000;
+        -webkit-transform: scale(1) skewY(-10deg);
+        
+        width: 100%;
+        text-shadow: 0.3em;
+        font-size: 10em;
+        z-index: 20;
+    }
+
+    #grey_layer {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background-color: #000;
+        z-index: 10;
+    }
+
+    aside {
+        display: block;
+      font-size: 0.5em;  
+    }
 </style>
 
 </head>
 
 <body>
-<div id="health_container"> HEALTH : <span id="health"></span></div>
-<div id="score_container"> SCORE: <span id="score"></span></div>
+<div id="grey_layer"></div>
 
+<div id="health_container"> HEALTH : <span id="health">100</span></div>
+<div id="score_container"> SCORE: <span id="score">0</span></div>
+
+<div id="main_notification">Elevated <br> Risk</div>
 <div id="main_container">
     <div id="inner_container">
         <canvas id="main" width="800px" height="300px">
@@ -68,6 +98,7 @@
         </canvas>
     </div>
 </div>
+
 
 <div id="images">
     <!-- player -->

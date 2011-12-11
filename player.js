@@ -125,7 +125,13 @@ define(["lib/compose"], function(compose){
         damage: function(amount){
             this.health -= amount
             this.health_el.innerHTML = this.health
-            if ( this.health <= 0 ) this.game.remove(this)
+            if ( this.health <= 0 ) {
+            
+                this.game.remove(this)
+                $("#grey_layer").fadeTo(0.1);
+                $("#main_notification").html("Game Over <aside>The ninja's are happy-dancing</asside>")
+                                        .fadeIn();
+            }
         },
 
         check_collision: function(object){

@@ -1,6 +1,16 @@
 define(["lib/bean", 'lib/flywheel', 'player', 'level_manager', 'game'], function(bean, flywheel, Player, LevelManager, Game){
     
-    window.onload = function(){
+
+    // show title, then init
+    
+    $("body").fadeIn(500, function(){ 
+        $("#grey_layer").fadeOut(1500, 
+            init
+        );
+        $("#main_notification").fadeOut(1500)
+    })
+    
+    function init(){
          // init game
         var canvas = document.getElementById("main"),
             input = {
@@ -67,6 +77,5 @@ define(["lib/bean", 'lib/flywheel', 'player', 'level_manager', 'game'], function
             game.update_entities(td, ts)
         }).start()
      
-        $("body").fadeIn(500)
     }
 })
