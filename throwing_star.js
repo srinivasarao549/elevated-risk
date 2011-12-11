@@ -30,7 +30,7 @@ define(['lib/compose'], function(compose){
         
         check_collision: function(object){
             if ( object.id == "player" ) {
-                object.damage(5);
+                object.damage(20);
                 this.game.remove(this)
 
             }

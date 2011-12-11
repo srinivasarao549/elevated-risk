@@ -132,20 +132,46 @@ define(["lib/compose", "throwing_star"], function(compose, ThrowingStar){
                     if_far(object, player, game)
             }
 
+            function handle_invunerability(object){
+                if ( object.make_invunerable ) {
+                    object.make_invunerable = false
+                    object.invunerable = true
+                    object.last.invunerable = ts
+                } else if ( object.invunerable > object.last.invunerable + 1000 ) {
+                    object.invunerable = false
+                }
+                console.log(object.invunerable, object.make_invunerable)
+            }
+
             if ( this.facing == "left" ) this.image = this.images.left
             else this.image = this.images.right
             
+            // ai stuff
             check_on_floor(this)
             check_in_room(this)
-
-                     
             check_close(this, player, this.game)
-
             correct_height(this)
-                
-        }
             
-    })
+            // invunerability
+            handle_invunerability(this)
+        },
+
+        damage: function(amount, object){
+            
+            if ( object.x_vel ) {
+                if ( object.x_vel > 0) this.x_vel += 1000
+                if ( object.x_vel < 0) this.x_vel -= 1000
+            }
+
+            if ( !this.invunerable ){
+                 this.health -= amount
+                 this.make_invunerable = true
+            }
+
+            if ( this.health <= 0 ) this.game.remove(this)
+        }
+        
+        })
 
     return ThrowNinja
 

@@ -114,6 +114,10 @@ define(["lib/compose"], function(compose){
         damage: function(amount){
             this.health -= amount
             if ( this.health <= 0 ) this.game.remove(this)
+        },
+
+        check_collision: function(object){
+            if ( object.collision_type == "enemy" && this.attacking ) object.damage(20, this)
         }
     })
 
