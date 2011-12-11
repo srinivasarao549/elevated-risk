@@ -18,9 +18,9 @@ define(["lib/bean", 'lib/flywheel', 'player', 'level_manager', 'game'], function
             // load sounds
             Object.keys(sound_list).forEach(function(sound_name){
                 sounds[sound_name] = soundManager.createSound(sound_name, sound_list[sound_name])
+                sounds[sound_name].load()
             })
 
-            //
             init_title_screen()
         });
     }
