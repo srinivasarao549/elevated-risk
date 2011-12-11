@@ -14,6 +14,11 @@ define(["lib/compose", "lib/om"], function(compose, om){
             if ( object.collision_type ) this.collision_objects.push(object)
         },
 
+        find_by_type: function(type){
+            
+            return this.objects.filter(function(object){ return object.type == type })
+        },
+
         // object stages
         draw_entities: function(){
             var canvas = this.canvas,

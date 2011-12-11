@@ -9,6 +9,7 @@
         height: 100%;
         padding: 0;
         margin: 0;
+        color: #eee;
     }
     
     #main_container {
@@ -36,12 +37,19 @@
         display: none;
     }
 
+    #health_container {
+        position: absolute;
+        top: 0.5em;
+        left: 0.5em;
+        font-size: 2em;
+    }
+
 </style>
 
 </head>
 
 <body>
-
+<div id="health_container"> HEALTH : <span id="health"></span></div>
 <div id="main_container">
     <div id="inner_container">
         <canvas id="main" width="800px" height="300px">

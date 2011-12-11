@@ -13,6 +13,7 @@ define(["lib/compose", "throwing_star"], function(compose, ThrowingStar){
         this.max_x_vel = 300
         this.friction = 70
         this.collision_type = "enemy"
+        this.type = "enemy"
 
         // state
         this.image = undefined

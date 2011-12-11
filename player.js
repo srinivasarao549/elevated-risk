@@ -1,4 +1,4 @@
-define(["lib/compose"], function(compose){
+define(["lib/compose", "health"], function(compose, Health){
 
     var Player = compose(function(){
         this.last = {
@@ -35,6 +35,8 @@ define(["lib/compose"], function(compose){
             attacking_left: document.getElementById("player_attacking_left")
         }
         this.game = undefined
+
+        this.health_el = document.getElementById("health")
     },
     {
         id: "player",
@@ -112,6 +114,9 @@ define(["lib/compose"], function(compose){
             this.y += this.height - this.image.height
             this.height = this.image.height
         
+        
+            // update health 
+            this.health_el.innerHTML = this.health
         },
 
         damage: function(amount){
