@@ -1,6 +1,6 @@
 define(["lib/compose"], function(compose){
 
-    var Player = compose(function(){
+    var Ninja = compose(function(){
         
         // constraints
         this.max_y_vel = 1000
@@ -26,12 +26,12 @@ define(["lib/compose"], function(compose){
 
         // convenience
         this.images = {
-            left: document.getElementById("player_left"),
-            right: document.getElementById("player_right"),
-            attacking_right: document.getElementById("player_attacking_right"),
-            attacking_left: document.getElementById("player_attacking_left"),
-            blocking_right: document.getElementById("player_blocking_right"),
-            blocking_left: document.getElementById("player_blocking_left")
+            left: document.getElementById("throw_ninja_left"),
+            right: document.getElementById("throw_ninja_right"),
+            attacking_right: document.getElementById("throw_ninja_right"),
+            attacking_left: document.getElementById("throw_ninja_attacking_left"),
+            blocking_right: document.getElementById("throw_ninja_blocking_right"),
+            blocking_left: document.getElementById("throw_ninja_blocking_left")
         }
         this.game = undefined
     },
@@ -40,43 +40,30 @@ define(["lib/compose"], function(compose){
             var input = this.game.input,
                 was_facing = this.facing
 
+            //  on floor logic
+            if ( this.y + this.height >= 300 ){
+                this.y = 300 - this.height
+                this.y_vel = 0
+                this.on_floor = true
+            } else {
+                this.on_floor = false
+            }             
 
-            function check_on_floor(object){
-                 //  on floor logic
-                if ( object.y + object.height >= 300 ){
-                    object.y = 300 - object.height
-                    object.y_vel = 0
-                    object.on_floor = true
-                } else {
-                    object.on_floor = false
-                }          
-            }
-              
-            function jump(object, td){
-                if ( object.on_floor ) object.y_vel -= 500
-                else object.y_vel -= (600 * td)
+            // jumping
+            if ( input.jump  && this.on_floor ) this.y_vel -= 500
+            else if ( input.jump ) this.y_vel -= (600 * td)     // megaman style - control jump height
 
-            }
-
-            function move_left_right(object, input, td){
-                // moving left to right and friction logic
-                object.apply_friction = false
-                if ( input.left ){
-                    object.x_vel -= (1000 * td)
-                    object.facing = "left"
-                }            
-                else if ( input.right ) {
-                    object.x_vel += (1000 * td)
-                    object.facing = "right"
-                } 
-                else object.apply_friction = true
-            }
-           
-
-            check_on_floor(this)
-            if ( input.jump ) jump(this, td)
-            move_left_right(this, input, td)
-
+            // moving left to right and friction logic
+            this.apply_friction = false
+            if ( input.left ){
+                 this.x_vel -= (1000 * td)
+                this.facing = "left"
+            }            
+            else if ( input.right ) {
+                this.x_vel += (1000 * td)
+                this.facing = "right"
+            } 
+            else this.apply_friction = true
 
             // attacking and blocking
             if ( input.block ) this.blocking = true
