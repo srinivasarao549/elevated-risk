@@ -68,23 +68,6 @@
         </canvas>
     </div>
 </div>
-<script data-main="main.js" src="require.js"></script>
-<script src="lib/jquery-1.7.1.min.js"></script>
-
-<script>
-// move background 
-!function elevator_down(){
-    
-    $("#main_container").scrollTop(0)
-    $("#main_container")
-        .animate({'scrollTop': "+506px"}, 
-                 5000,
-                 "linear", 
-                 elevator_down
-                 )
-}()
-</script>
-
 
 <div id="images">
     <!-- player -->
@@ -104,5 +87,25 @@
     <img id="throwing_star_right" src="img/throwing_star_right.png">
 
 </div>
+
+<script src="lib/jquery-1.7.1.min.js"></script>
+<script>
+    $("body").hide();
+</script>
+<script data-main="main.js" src="require.js"></script>
+
+<script>
+// move background 
+!function elevator_down(){
+    
+    $("#main_container").scrollTop(0)
+    $("#main_container")
+        .animate({'scrollTop': "+506px"}, 
+                 5000,
+                 "linear", 
+                 elevator_down
+                 )
+}()
+</script>
 </body>
 </html>

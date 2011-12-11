@@ -14,7 +14,7 @@ define(['lib/compose', 'throw_ninja'], function(compose, ThrowNinja){
                 var ninja = new ThrowNinja
                 ninja.x = 20
                 var ninja2 = new ThrowNinja
-                ninja.x = 720
+                ninja2.x = 720
         
                 game.add(ninja)
                 game.add(ninja2)

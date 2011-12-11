@@ -18,7 +18,7 @@ define(["lib/compose", "throwing_star"], function(compose, ThrowingStar){
         // state
         this.image = undefined
         this.x = 300
-        this.y = 100
+        this.y = -100
         this.width = 80
         this.height = 100
         this.x_vel = 0
