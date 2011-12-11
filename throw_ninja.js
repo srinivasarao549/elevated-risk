@@ -26,7 +26,7 @@ define(["lib/compose", "throwing_star"], function(compose, ThrowingStar){
         
         this.facing = "left"
 
-        this.health = 100
+        this.health = 10
         this.invunerable = false
         this.make_invunerable = false
 

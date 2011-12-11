@@ -1,4 +1,4 @@
-define(["lib/compose", "health"], function(compose, Health){
+define(["lib/compose"], function(compose){
 
     var Player = compose(function(){
         this.last = {
@@ -22,6 +22,7 @@ define(["lib/compose", "health"], function(compose, Health){
         this.facing = "left"
 
         this.health = 100
+        this.score = 0
         this.falling = false
         this.apply_friction = true
         this.blocking = false
@@ -37,6 +38,10 @@ define(["lib/compose", "health"], function(compose, Health){
         this.game = undefined
 
         this.health_el = document.getElementById("health")
+        this.health_el.innerHTML = this.health
+
+        this.score_el = document.getElementById("score")
+        this.score_el.innerHTML = this.score
     },
     {
         id: "player",
@@ -115,17 +120,20 @@ define(["lib/compose", "health"], function(compose, Health){
             this.height = this.image.height
         
         
-            // update health 
-            this.health_el.innerHTML = this.health
         },
 
         damage: function(amount){
             this.health -= amount
+            this.health_el.innerHTML = this.health
             if ( this.health <= 0 ) this.game.remove(this)
         },
 
         check_collision: function(object){
-            if ( object.collision_type == "enemy" && this.attacking ) object.damage(20, this)
+            if ( object.collision_type == "enemy" && this.attacking ) {
+                this.score += 100
+                this.score_el.innerHTML = this.score
+                object.damage(20, this)
+            }
         }
     })
 
