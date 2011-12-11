@@ -1,6 +1,9 @@
-define(["lib/compose"], function(compose){
+define(["lib/compose", "throwing_star"], function(compose, ThrowingStar){
 
     var ThrowNinja = compose(function(){
+        
+        // last time an action was taken, for 'cooldowns'
+        this.last = {}
         
         // constraints
         this.max_y_vel = 1000
@@ -37,15 +40,32 @@ define(["lib/compose"], function(compose){
             var was_facing = this.facing,
                 player = this.game.find_by_id("player")
 
+
             function check_on_floor(object){
                  //  on floor logic
                 if ( object.y + object.height >= 300 ){
                     object.y = 300 - object.height
                     object.y_vel = 0
-                    object.on_floor = true
+                    object.falling = false
                 } else {
-                    object.on_floor = false
+                    object.falling = true
                 }          
+            }
+              
+            function jump(object, td){
+                if ( !object.falling ) object.y_vel -= 500
+                else object.y_vel -= (600 * td)
+
+            }
+            function check_in_room(object){
+                if ( object.x + object.width >= 800 ) {
+                    object.x = 800 - object.width
+                    object.x_vel = 0
+                } else if ( object.x <= 0 ){
+                    object.x = 0
+                    object.x_vel = 0
+                }
+            
             }
               
             function jump(object, td){
@@ -59,11 +79,11 @@ define(["lib/compose"], function(compose){
                 object.apply_friction = false
                 if ( input.left ){
                     object.x_vel -= (1000 * td)
-                    object.facing = "left"
+                    object.facing = "right"
                 }            
                 else if ( input.right ) {
                     object.x_vel += (1000 * td)
-                    object.facing = "right"
+                    object.facing = "left"
                 } 
                 else object.apply_friction = true
             }
@@ -73,17 +93,49 @@ define(["lib/compose"], function(compose){
                 object.height = object.image.height
             }
             
+            // try to jump over and run
+            function if_close(){
             
-            this.image = this.images.left;
+            }
+
+            // try to attack
+            function if_far(){
+            
+            }
+
+            function attack(object, player, game){
+                var star = new ThrowingStar
+
+                if( object.x < player.x ){
+                    star.x_vel = 1000
+                } else {
+                    star.x_vel = -1000
+                }
+                star.x = object.x + object.width/2
+                star.y = object.y + object.height/2
+
+                game.add(star)
+            }
+
+            function check_close(object, player){
+            
+            }
+
+    
+            if ( this.facing == "left" ) this.image = this.images.left
+            else this.image = this.images.right
+
             
             check_on_floor(this)
-           // jump(this, td)
+            check_in_room(this)
 
-            if ( player.x < this.x ) move(this, {left: true, right: false}, td )
-            else move(this, {left: false, right: true}, td)
-            correct_height(this)
+            // run away
+            if ( player.x < this.x ) move(this, {left: false, right: true}, td )
+            else move(this, {left: true, right: false}, td)
             
-        
+            attack(this, player, this.game)
+            correct_height(this)
+                
         }
             
     })

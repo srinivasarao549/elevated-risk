@@ -42,10 +42,10 @@ define(["lib/compose", "lib/om"], function(compose, om){
 
             function move(object){
                  // update gravity
-                if ( !object.on_floor ) object.y_vel += gravity * td
+                if ( object.falling ) object.y_vel += gravity * td
 
                 // update friction
-                if ( object.on_floor && object.apply_friction ) object.x_vel = object.x_vel / (object.friction * td)
+                if ( object.apply_friction ) object.x_vel = object.x_vel / (object.friction * td)
 
                 // limit velocities
                 if ( object.y_vel > object.max_y_vel ) object.y_vel = object.max_y_vel

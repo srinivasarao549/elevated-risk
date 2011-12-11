@@ -20,7 +20,7 @@ define(["lib/compose"], function(compose){
         this.facing = "left"
 
         this.health = 100
-        this.on_floor = false
+        this.falling = false
         this.apply_friction = true
         this.blocking = false
         this.attacking = false
@@ -48,14 +48,14 @@ define(["lib/compose"], function(compose){
                 if ( object.y + object.height >= 300 ){
                     object.y = 300 - object.height
                     object.y_vel = 0
-                    object.on_floor = true
+                    object.falling = false
                 } else {
-                    object.on_floor = false
+                    object.falling = true
                 }          
             }
               
             function jump(object, td){
-                if ( object.on_floor ) object.y_vel -= 500
+                if ( !object.falling ) object.y_vel -= 500
                 else object.y_vel -= (600 * td)
 
             }
