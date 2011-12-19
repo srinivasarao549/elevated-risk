@@ -32,7 +32,6 @@ define(['lib/compose'], function(compose){
             if ( object.id == "player" ) {
                 if ( !object.attacking ) object.damage(20);
                 this.game.remove(this)
-
             }
         }
     })

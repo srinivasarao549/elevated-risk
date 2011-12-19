@@ -14,6 +14,7 @@ define(["lib/compose", "throwing_star"], function(compose, ThrowingStar){
         this.friction = 70
         this.collision_type = "enemy"
         this.type = "enemy"
+        this.throw_rate = 1000
 
         // state
         this.image = undefined
@@ -116,7 +117,7 @@ define(["lib/compose", "throwing_star"], function(compose, ThrowingStar){
 
             function attack(object, player, game){
 
-                if ( ts > object.last.attack + 1000 ){
+                if (ts > object.last.attack + object.throw_rate ){
                     var star = new ThrowingStar
 
                     if( object.x < player.x ){
@@ -183,6 +184,20 @@ define(["lib/compose", "throwing_star"], function(compose, ThrowingStar){
             }
 
             if ( this.health <= 0 ) this.game.remove(this)
+        },
+        check_collision: function(object){
+
+            var bounce_back = 0.5
+
+            if ( object.collision_type == "enemy" ){
+                if ( this.x < object.x ) {
+                    object.x += bounce_back
+                    this.x -= bounce_back
+                } else {
+                    object.x -= bounce_back
+                    this.x += bounce_back
+                }
+            }
         }
         
         })

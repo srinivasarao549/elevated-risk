@@ -148,12 +148,20 @@ define(["lib/compose"], function(compose){
             }
         },
 
+        heal: function(amount){
+            this.health += amount
+            this.health_el.innerHTML = this.health
+        },
+
         check_collision: function(object){
             if ( object.collision_type == "enemy" && this.attacking ) {
                 this.score += 100
                 this.score_el.innerHTML = this.score
                 object.damage(20, this)
                 this.game.sounds.sword.play()
+            }
+            if ( object.collision_type == "weapon" && this.attacking ) {
+                this.game.sounds.metal_clash.play()
             }
         }
     })

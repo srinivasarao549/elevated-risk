@@ -4,7 +4,9 @@ define(["lib/bean", 'lib/flywheel', 'player', 'level_manager', 'game'], function
         sound_list = {
             sword: 'sound/sword.wav',
             air_cut: 'sound/air_cut.wav',
-            grunt: 'sound/grunt.wav'
+            grunt: 'sound/grunt.wav',
+            metal_clash: 'sound/metal_clash.wav',
+            health: 'sound/health.wav'
         }
 
     $("body").fadeIn(500)

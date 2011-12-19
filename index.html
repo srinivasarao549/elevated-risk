@@ -53,7 +53,7 @@
         right: 0.5em;
     }
 
-    #main_notification {
+    .big {
         position: absolute;
         text-align: center;
         top: 0.5em;
@@ -88,10 +88,15 @@
         z-index: 10;
     }
 
+    #won {
+        display: none
+    }
+
     aside {
         display: block;
       font-size: 0.5em;  
     }
+
 </style>
 
 </head>
@@ -102,7 +107,8 @@
 <div id="health_container"> HEALTH : <span id="health">100</span></div>
 <div id="score_container"> SCORE: <span id="score">0</span></div>
 
-<div id="main_notification">Elevated <br> Risk</div>
+<div id="main_notification" class="big">Elevated <br> Risk</div>
+<div id="won" class="big">YOU WON!</div>
 <div id="instructions"> Arrows to Move <br> X to STRIKE </div>
 
 <div id="main_container">
@@ -131,6 +137,9 @@
     <img id="throwing_star_left" src="img/throwing_star_left.png">
     <img id="throwing_star_right" src="img/throwing_star_right.png">
 
+
+    <!-- health -->
+    <img id="health_pickup" src="img/health.png">
 </div>
 
 <script src="lib/jquery-1.7.1.min.js"></script>
