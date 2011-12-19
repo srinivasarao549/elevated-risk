@@ -61,6 +61,16 @@ define(["lib/compose"], function(compose){
                 }          
             }
               
+            function check_in_room(object){
+                if ( object.x + object.width >= 800 ) {
+                    object.x = 800 - object.width
+                    object.x_vel = 0
+                } else if ( object.x <= 0 ){
+                    object.x = 0
+                    object.x_vel = 0
+                }
+            }
+
             function jump(object, td){
                 if ( !object.falling ) object.y_vel -= 500
                 else object.y_vel -= (600 * td)
@@ -93,6 +103,7 @@ define(["lib/compose"], function(compose){
             }
 
             check_on_floor(this)
+            check_in_room(this)
             if ( input.jump ) jump(this, td)
             move_left_right(this, input, td)
 
