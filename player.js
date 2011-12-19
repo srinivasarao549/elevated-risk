@@ -157,7 +157,7 @@ define(["lib/compose"], function(compose){
             if ( object.collision_type == "enemy" && this.attacking ) {
                 this.score += 100
                 this.score_el.innerHTML = this.score
-                object.damage(20, this)
+                object.damage(10, this)
                 this.game.sounds.sword.play()
             }
             if ( object.collision_type == "weapon" && this.attacking ) {

@@ -12,7 +12,7 @@ define(['lib/compose', 'health', 'throw_ninja'], function(compose, Health, Throw
                 {number: 2, throw_rate: 1500, health: 20, speed: 300},
                 {number: 2, throw_rate: 1500, health: 20, speed: 300},
                 {number: 2, throw_rate: 1500, health: 20, speed: 300},
-                {number: 2, throw_rate: 1500, health: 20, speed: 300, health_pickup: true},
+                {number: 2, throw_rate: 1500, health: 20, speed: 300},
                 
                 {number: 3, throw_rate: 2000, health: 20, speed: 300},
                 {number: 3, throw_rate: 2000, health: 20, speed: 300},
@@ -22,12 +22,12 @@ define(['lib/compose', 'health', 'throw_ninja'], function(compose, Health, Throw
                 {number: 4, throw_rate: 2000, health: 20, speed: 300},
                 {number: 4, throw_rate: 2000, health: 20, speed: 300},
                 {number: 4, throw_rate: 2000, health: 20, speed: 300},
-                {number: 4, throw_rate: 2000, health: 20, speed: 300, health_pickup: true},
+                {number: 4, throw_rate: 2000, health: 20, speed: 300},
 
                 {number: 5, throw_rate: 2000, health: 20, speed: 300},
                 {number: 5, throw_rate: 2000, health: 20, speed: 300},
                 {number: 5, throw_rate: 2000, health: 20, speed: 300},
-                {number: 4, throw_rate: 2000, health: 20, speed: 300},
+                {number: 5, throw_rate: 2000, health: 20, speed: 300},
             ],
         current_wave: 0,
         game: undefined,
@@ -58,7 +58,7 @@ define(['lib/compose', 'health', 'throw_ninja'], function(compose, Health, Throw
                     game.add(ninja)
                 }
 
-                if ( wave.health_pickup ) {
+                if ( Math.random() > 0.6 ) {
                     var health = new Health
                     if ( Math.random() > 0.5 )
                         health.x = player.x + 800 - (Math.random() * 100)
