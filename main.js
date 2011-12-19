@@ -30,6 +30,7 @@ define(["lib/bean", 'lib/flywheel', 'player', 'level_manager', 'game'], function
                 init
             );
             $("#main_notification").fadeOut(1500)
+            $("#instructions").delay(5000).fadeOut(100)
     }
     
     function init(){
